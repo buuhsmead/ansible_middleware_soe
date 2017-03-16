@@ -5,7 +5,7 @@
 ## You have to choose one out of the two following options to download the Red Hat JBoss binaries:
 
 # 1) Point to a local directory containing all required Red Hat binaries
-local_rh_bin_dir: /opt/tools/jboss/bin
+local_rh_bin_dir: ~/redhat_download
 
 # 2) Set your Red Hat Network (https://access.redhat.com) username and password for downloading the required binaries
 #rhn_username: MY_ACCESS_REDHAT_COM_USERNAME
@@ -17,7 +17,7 @@ local_rh_bin_dir: /opt/tools/jboss/bin
 remote_user: "vagrant"
 
 # Local directory used for storing all binaries used by the SOE
-base_repo_dir: /tmp/mw_repo
+base_repo_dir: ~/golden_images
 
 # Local directory containing all Java applications
 app_dir: "{{ base_repo_dir }}/java_apps/bin"

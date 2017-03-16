@@ -1,0 +1,27 @@
+---
+
+# Setup the controller machine
+- hosts: localhost
+  connection: local
+  vars:
+    required_software:
+
+      # Red Hat JBoss EAP
+      - { id: '43891', name: 'jboss-eap-7.0.0' }
+      #- { id: '45601', name: 'jboss-eap-7.0.1-patch' }
+      #- { id: '46431', name: 'jboss-eap-7.0.2-patch' }
+      #- { id: '47721', name: 'jboss-eap-7.0.3-patch' }
+      - { id: '49331', name: 'jboss-eap-7.0.4-patch' }
+
+    golden_images_eap_7:
+      - 7.0.4
+
+  roles:
+    # Import necessary for the "download-binaries" role.
+    - {role: "sabre1041.redhat-csp-download"}
+
+    # Download the Red Hat software.
+    - {role: "download-binaries"}
+
+    # Create golden images.
+    - {role: "golden-image"}
