@@ -3,6 +3,8 @@
 # This script builds the company specific Red Hat JBoss EAP gold-master distribution for EAP 6.4.x
 #
 
+# set -x
+
 if [ "$#" -ne 5 ]
 then
   echo "Usage: $0 <LOG_FILE> <JBOSS_EAP_6_VERSION> <DIR_SOURCE> <DIR_TARGET> <DIR_CONF>"
@@ -40,8 +42,6 @@ declare COMMAND
 export JBOSS_HOME="${DIR_TARGET_EAP}"
 
 echo "\n[${VERSION}] Unpack JBoss EAP binaries (${FILE_EAP_BASIS}) \n${SEPARATOR}" >> "${FILE_LOG}"
-
-#set -x
 
 COMMAND="rm -Rf ${DIR_TARGET}; mkdir -p ${DIR_TARGET}"
 echo ${COMMAND} >> "${FILE_LOG}"

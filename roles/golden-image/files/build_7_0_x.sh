@@ -49,6 +49,7 @@ eval ${COMMAND}
 COMMAND="unzip ${FILE_SOURCE_EAP} -d ${DIR_TARGET} 2>> ${FILE_LOG} 1>> /dev/null"
 echo ${COMMAND} >> "${FILE_LOG}"
 eval ${COMMAND}
+
 COMMAND="mv ${DIR_TARGET}/${DIR_IN_ZIP} ${DIR_TARGET_EAP} 2>&1 >> ${FILE_LOG}"
 echo ${COMMAND} >> "${FILE_LOG}"
 eval ${COMMAND}
@@ -84,7 +85,7 @@ done
 CLIS=( "delete_console_logger.cli" )
 for CLI in "${CLIS[@]}"
 do
-  cat ${DIR_CONF}/cli/$CLI >> ${FILE_CLI}
+  cat ${DIR_CONF}/cli/${CLI} >> ${FILE_CLI}
   echo "----->>>  ${DIR_CONF}/cli/$CLI" >> ${FILE_LOG}
 done
 
@@ -108,20 +109,11 @@ done
 ###eval ${COMMAND}
 
 #### Renaming for staying consistent with EAP 6.x
-###COMMAND="mv ${DIR_TARGET_EAP}/bin/init.d/jboss-eap-rhel.sh ${DIR_TARGET_EAP}/bin/init.d/jboss-as-standalone.sh 2>&1 >> '${FILE_LOG}'"
-###echo ${COMMAND} >> "${FILE_LOG}"
-###eval ${COMMAND}
-
-#### Renaming for staying consistent with EAP 6.x
-###COMMAND="sed -i.bak s/jboss.management.http.port/'jboss.management.native.port'/g ${DIR_TARGET_EAP}/standalone/configuration/standalone*.xml"
-###echo ${COMMAND} >> "${FILE_LOG}"
-###eval ${COMMAND}
-
-COMMAND="rm -f ${DIR_TARGET_EAP}/standalone/configuration/*.bak 2>&1 >> ${FILE_LOG}"
+COMMAND="mv ${DIR_TARGET_EAP}/bin/init.d/jboss-eap-rhel.sh ${DIR_TARGET_EAP}/bin/init.d/jboss-as-standalone.sh 2>&1 >> '${FILE_LOG}'"
 echo ${COMMAND} >> "${FILE_LOG}"
 eval ${COMMAND}
 
-echo "\n[${VERSION}] Package and cleanup\n${SEPARATOR}"
+echo "\n[${VERSION}] Package and cleanup\n${SEPARATOR}" >> "${FILE_LOG}"
 
 # Domain mode excluded
 COMMAND="rm -Rf ${DIR_TARGET_EAP}/domain 2>&1 >> ${FILE_LOG}"
@@ -134,7 +126,7 @@ echo ${COMMAND} >> ${FILE_LOG}
 eval ${COMMAND}
 
 # Folder cleanup
-COMMAND="rm -Rf '${DIR_TARGET_EAP}/standalone/{log,data,tmp}' '${DIR_TARGET_EAP}/standalone/deployments/*' '${DIR_TARGET_EAP}/standalone/configuration/standalone_xml_history'"
+COMMAND="rm -Rf '${DIR_TARGET_EAP}/standalone/log/*' '${DIR_TARGET_EAP}/standalone/data/*' '${DIR_TARGET_EAP}/standalone/deployments/*' '${DIR_TARGET_EAP}/standalone/configuration/standalone_xml_history'"
 echo ${COMMAND} >> ${FILE_LOG}
 eval ${COMMAND}
 

@@ -14,7 +14,8 @@
       - { id: '49331', name: 'jboss-eap-7.0.4-patch' }
 
     golden_images_eap_7:
-      - 7.0.4
+      #- 7.0.4
+      - 7.0.0
 
   roles:
     # Import necessary for the "download-binaries" role.
